@@ -1,0 +1,22 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/xiaodidemo?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: root
+
+
+mybatis:
+  configuration:
+#    开启控制台打印sql
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#    下划线转驼峰配置
+    map-underscore-to-camel-case: true
+#  配置扫描
+#  mapper-locations: classpath:mapper/*.xml
+#  配置xml的结果别名
+#  type-aliases-package: net.htwater.xiaodiclass.domain
