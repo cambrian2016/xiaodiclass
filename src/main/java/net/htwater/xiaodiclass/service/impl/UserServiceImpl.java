@@ -1,9 +1,11 @@
 package net.htwater.xiaodiclass.service.impl;
 
-import net.htwater.xiaodiclass.domain.User;
+import io.jsonwebtoken.Claims;
+import net.htwater.xiaodiclass.model.entity.User;
 import net.htwater.xiaodiclass.mapper.UserMapper;
 import net.htwater.xiaodiclass.service.UserService;
 import net.htwater.xiaodiclass.utils.EncryptUtil;
+import net.htwater.xiaodiclass.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +32,30 @@ public class UserServiceImpl implements UserService {
         } else {
             return -1;
         }
+    }
+
+    @Override
+    public String findByPhoneAndPwd(String phone, String pwd) {
+        User user=userMapper.findByPhoneAndPwd(phone, EncryptUtil.getMD5(pwd));
+        if (user==null){
+            return null;
+        }else {
+            String token= JwtUtil.geneJsonWebToken(user);
+            System.out.println("token = "+token);
+
+            try {
+                Thread.sleep(1000*5L);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            Claims claims=JwtUtil.checkJwt(token);
+            String name = (String) claims.get("name");
+
+            System.out.println("name = "+name);
+            return token;
+        }
+
     }
 
     private User parseToUser(Map<String, String> userInfo) {

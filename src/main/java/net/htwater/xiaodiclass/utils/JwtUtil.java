@@ -1,7 +1,7 @@
 package net.htwater.xiaodiclass.utils;
 
 import io.jsonwebtoken.*;
-import net.htwater.xiaodiclass.domain.User;
+import net.htwater.xiaodiclass.model.entity.User;
 
 import java.util.Date;
 
@@ -20,6 +20,7 @@ public class JwtUtil {
 
     //过期时间
     private static final long EXPIRE=1000*60*60*24*7L;
+//    private static final long EXPIRE=1000*5L;
 
     //加密密钥
     private static final String SECRET="xdclass.net168";
@@ -39,7 +40,8 @@ public class JwtUtil {
                 .claim("name",user.getName())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis()+EXPIRE))
-                .signWith(SignatureAlgorithm.HS256,SECRET).compact();
+                .signWith(SignatureAlgorithm.HS256,SECRET)
+                .compact();
 
         token=TOKEN_PREFIX+token;
         return token;

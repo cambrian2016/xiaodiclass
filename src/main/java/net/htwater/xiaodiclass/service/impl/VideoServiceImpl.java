@@ -1,7 +1,7 @@
 package net.htwater.xiaodiclass.service.impl;
 
-import net.htwater.xiaodiclass.domain.Video;
-import net.htwater.xiaodiclass.domain.VideoBanner;
+import net.htwater.xiaodiclass.model.entity.Video;
+import net.htwater.xiaodiclass.model.entity.VideoBanner;
 import net.htwater.xiaodiclass.mapper.VideoMapper;
 import net.htwater.xiaodiclass.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;

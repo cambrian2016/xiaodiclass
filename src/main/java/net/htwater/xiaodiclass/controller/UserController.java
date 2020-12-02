@@ -1,6 +1,6 @@
 package net.htwater.xiaodiclass.controller;
 
-import net.htwater.xiaodiclass.domain.User;
+import net.htwater.xiaodiclass.model.request.LoginRequest;
 import net.htwater.xiaodiclass.service.UserService;
 import net.htwater.xiaodiclass.utils.JsonData;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +29,18 @@ public class UserController {
             return JsonData.buildSuccess("注册成功");
         } else {
             return JsonData.buildError("注册失败,请重试");
+        }
+    }
+
+    //登录接口
+    @PostMapping("login")
+    public JsonData login(@RequestBody LoginRequest loginRequest){
+        String token=userService.findByPhoneAndPwd(loginRequest.getPhone(),loginRequest.getPwd());
+
+        if (token==null){
+             return JsonData.buildError("登录失败,账号密码错误");
+        }else {
+            return JsonData.buildSuccess(token);
         }
     }
 }

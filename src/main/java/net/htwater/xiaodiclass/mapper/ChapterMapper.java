@@ -1,6 +1,6 @@
 package net.htwater.xiaodiclass.mapper;
 
-import net.htwater.xiaodiclass.domain.Chapter;
+import net.htwater.xiaodiclass.model.entity.Chapter;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package net.htwater.xiaodiclass.service;
 
-import net.htwater.xiaodiclass.domain.Video;
-import net.htwater.xiaodiclass.domain.VideoBanner;
+import net.htwater.xiaodiclass.model.entity.Video;
+import net.htwater.xiaodiclass.model.entity.VideoBanner;
 
 import java.util.List;
 

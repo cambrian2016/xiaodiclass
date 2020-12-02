@@ -1,4 +1,4 @@
-package net.htwater.xiaodiclass.domain;
+package net.htwater.xiaodiclass.model.entity;
 
 
 import java.util.Date;

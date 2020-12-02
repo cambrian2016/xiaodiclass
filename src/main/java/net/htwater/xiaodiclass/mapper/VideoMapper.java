@@ -1,12 +1,9 @@
 package net.htwater.xiaodiclass.mapper;
 
-import net.htwater.xiaodiclass.domain.Chapter;
-import net.htwater.xiaodiclass.domain.Video;
-import net.htwater.xiaodiclass.domain.VideoBanner;
+import net.htwater.xiaodiclass.model.entity.Video;
+import net.htwater.xiaodiclass.model.entity.VideoBanner;
 import org.apache.ibatis.annotations.*;
-import org.springframework.stereotype.Repository;
 
-import java.util.Date;
 import java.util.List;
 
 @Mapper

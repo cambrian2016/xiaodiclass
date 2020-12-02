@@ -1,13 +1,11 @@
 package net.htwater.xiaodiclass.controller;
 
-import net.htwater.xiaodiclass.domain.Video;
-import net.htwater.xiaodiclass.domain.VideoBanner;
+import net.htwater.xiaodiclass.model.entity.Video;
+import net.htwater.xiaodiclass.model.entity.VideoBanner;
 import net.htwater.xiaodiclass.service.VideoService;
 import net.htwater.xiaodiclass.utils.JsonData;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
