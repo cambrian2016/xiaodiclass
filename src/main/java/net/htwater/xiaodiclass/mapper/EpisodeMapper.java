@@ -10,4 +10,7 @@ import java.util.List;
 public interface EpisodeMapper {
     @Select("SELECT * FROM episode WHERE chapter_id=#{chapterId}")
     List<Episode> findDetailById(int chapterId);
+
+    @Select("SELECT * FROM episode WHERE video_id=#{videoId} AND num=1")
+    Episode findFirstEpisodeByVideoId(int videoId);
 }

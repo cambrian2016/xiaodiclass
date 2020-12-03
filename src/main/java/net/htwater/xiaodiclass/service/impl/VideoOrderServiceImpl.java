@@ -1,8 +1,9 @@
 package net.htwater.xiaodiclass.service.impl;
 
-import net.htwater.xiaodiclass.mapper.UserMapper;
-import net.htwater.xiaodiclass.mapper.VideoMapper;
-import net.htwater.xiaodiclass.mapper.VideoOrderMapper;
+import net.htwater.xiaodiclass.exception.CustomException;
+import net.htwater.xiaodiclass.mapper.*;
+import net.htwater.xiaodiclass.model.entity.Episode;
+import net.htwater.xiaodiclass.model.entity.PlayRecord;
 import net.htwater.xiaodiclass.model.entity.Video;
 import net.htwater.xiaodiclass.model.entity.VideoOrder;
 import net.htwater.xiaodiclass.service.VideoOrderService;
@@ -25,17 +26,23 @@ public class VideoOrderServiceImpl implements VideoOrderService {
     @Autowired
     private VideoMapper videoMapper;
 
+    @Autowired
+    private EpisodeMapper episodeMapper;
+
+    @Autowired
+    private PlayRecordMapper playRecordMapper;
+
     @Override
     public int save(int userId, int videoId) {
 
-        VideoOrder videoOrder=videoOrderMapper.findByUserIdAndVideoIdAndState(userId,videoId,1);
-        if (videoOrder!=null){
+        VideoOrder videoOrder = videoOrderMapper.findByUserIdAndVideoIdAndState(userId, videoId, 1);
+        if (videoOrder != null) {
             return 0;
         }
 
-        Video video=videoMapper.findById(videoId);
+        Video video = videoMapper.findById(videoId);
 
-        VideoOrder videoOrderTemp=new VideoOrder();
+        VideoOrder videoOrderTemp = new VideoOrder();
         videoOrderTemp.setOutTradeNo(UUID.randomUUID().toString());
         videoOrderTemp.setState(1L);
         videoOrderTemp.setCreateTime(new Date());
@@ -45,7 +52,25 @@ public class VideoOrderServiceImpl implements VideoOrderService {
         videoOrderTemp.setVideoImg(video.getCoverImg());
         videoOrderTemp.setUserId((long) userId);
 
-        int count=videoOrderMapper.saveOrder(videoOrderTemp);
+        int count = videoOrderMapper.saveOrder(videoOrderTemp);
+
+        if (count == 1) {
+            Episode episode = episodeMapper.findFirstEpisodeByVideoId(videoId);
+
+            if (episode==null){
+                throw new CustomException(-1,"视频没有集信息,请联系运营人员检查");
+            }
+
+            PlayRecord playRecord = new PlayRecord();
+            playRecord.setUserId(userId);
+            playRecord.setVideoId(videoId);
+            playRecord.setCurrentNum(episode.getNum());
+            playRecord.setEpisodeId(episode.getId());
+            playRecord.setCreateTime(new Date());
+
+            int num = playRecordMapper.saveRecord(playRecord);
+        }
+
         return count;
     }
 }
