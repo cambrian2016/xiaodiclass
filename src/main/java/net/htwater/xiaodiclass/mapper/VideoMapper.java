@@ -32,6 +32,9 @@ public interface VideoMapper {
             ),
     })
     Video findDetailById(int videoId);
+
+    @Select("SELECT * FROM video WHERE id=#{videoId}")
+    Video findById(int videoId);
 }
 
 
