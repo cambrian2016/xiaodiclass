@@ -58,6 +58,13 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    @Override
+    public User findByUserId(String userId) {
+        User user=userMapper.findByUserId(userId);
+//        user.setPwd("");
+        return user;
+    }
+
     private User parseToUser(Map<String, String> userInfo) {
         if (userInfo.containsKey("phone") && userInfo.containsKey("pwd") && userInfo.containsKey("name")) {
             User user = new User();

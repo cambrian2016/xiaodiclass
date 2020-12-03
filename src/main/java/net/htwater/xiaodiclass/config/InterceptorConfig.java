@@ -27,11 +27,11 @@ public class InterceptorConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        //拦截全部pri 放行login register
-//        registry.addInterceptor(loginInterceptor()).addPathPatterns("/api/v1/pri/*/*/**");
-
-        registry.addInterceptor(loginInterceptor()).addPathPatterns("/api/v1/pri/*")
-                .excludePathPatterns("/api/v1/pri/user/login", "/api/v1/pri/user/user/register");
+        //?   匹配任何单字符
+        //*   匹配0或者任意数量的字符
+        //**  匹配0或者更多的目录
+        registry.addInterceptor(loginInterceptor()).addPathPatterns("/api/v1/pri/**")
+                .excludePathPatterns("/api/v1/pri/user/login", "/api/v1/pri/user/register");
 
         WebMvcConfigurer.super.addInterceptors(registry);
     }

@@ -1,12 +1,15 @@
 package net.htwater.xiaodiclass.model.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Date;
 
 public class User {
 
   private Long id;
   private String name;
+  @JsonIgnore
   private String pwd;
   private String headImg;
   private String phone;

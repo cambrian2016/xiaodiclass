@@ -31,7 +31,7 @@ public class LoginInterceptor implements HandlerInterceptor {
                     sendJsonMessage(response, JsonData.buildError("登录过期,重新登录"));
                     return false;
                 }
-                String id = (String) claims.get("id");
+                String id = claims.get("id")+"";
                 String name = (String) claims.get("name");
 
                 request.setAttribute("userId",id);

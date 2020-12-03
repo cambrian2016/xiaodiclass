@@ -1,14 +1,13 @@
 package net.htwater.xiaodiclass.controller;
 
+import net.htwater.xiaodiclass.model.entity.User;
 import net.htwater.xiaodiclass.model.request.LoginRequest;
 import net.htwater.xiaodiclass.service.UserService;
 import net.htwater.xiaodiclass.utils.JsonData;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 @RestController
@@ -41,6 +40,19 @@ public class UserController {
              return JsonData.buildError("登录失败,账号密码错误");
         }else {
             return JsonData.buildSuccess(token);
+        }
+    }
+
+    //根据UserId 查询User信息
+    @GetMapping("findUserInfoByToken")
+    public JsonData findUserInfoByToken(HttpServletRequest httpServletRequest){
+        String userId= (String) httpServletRequest.getAttribute("userId");
+
+        if (userId==null){
+            return JsonData.buildError("查询失败");
+        }else {
+            User user=userService.findByUserId(userId);
+            return JsonData.buildSuccess(user);
         }
     }
 }
