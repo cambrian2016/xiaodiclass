@@ -1,15 +1,15 @@
 package net.htwater.xiaodiclass.controller;
 
+import net.htwater.xiaodiclass.model.entity.Video;
+import net.htwater.xiaodiclass.model.entity.VideoOrder;
 import net.htwater.xiaodiclass.model.request.VideoOrderRequest;
 import net.htwater.xiaodiclass.service.VideoOrderService;
 import net.htwater.xiaodiclass.utils.JsonData;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/pri/videoOrder")
@@ -32,5 +32,14 @@ public class VideoOrderController {
             return JsonData.buildSuccess();
         }
 
+    }
+
+
+    //视频订单列表
+    @GetMapping("list")
+    public JsonData videoList(HttpServletRequest httpServletRequest){
+        String userId= (String) httpServletRequest.getAttribute("userId");
+        List<VideoOrder> videoOrderList=videoOrderService.videoOrderList(Integer.parseInt(userId));
+        return JsonData.buildSuccess(videoOrderList);
     }
 }

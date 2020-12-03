@@ -18,7 +18,7 @@ public class VideoController {
     @Autowired
     private VideoService videoService;
 
-    //失败列表
+    //视频列表
     @GetMapping("list")
     public JsonData videoList(){
         List<Video> videoList=videoService.videoList();

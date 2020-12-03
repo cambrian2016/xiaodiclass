@@ -7,12 +7,12 @@ import net.htwater.xiaodiclass.model.entity.PlayRecord;
 import net.htwater.xiaodiclass.model.entity.Video;
 import net.htwater.xiaodiclass.model.entity.VideoOrder;
 import net.htwater.xiaodiclass.service.VideoOrderService;
-import net.htwater.xiaodiclass.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -76,5 +76,11 @@ public class VideoOrderServiceImpl implements VideoOrderService {
         }
 
         return count;
+    }
+
+    @Override
+    public List<VideoOrder> videoOrderList(int userId) {
+        List<VideoOrder> videoOrderList= videoOrderMapper.videoOrderListByUserId(userId);
+        return videoOrderList;
     }
 }
