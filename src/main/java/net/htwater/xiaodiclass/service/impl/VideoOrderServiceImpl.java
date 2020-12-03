@@ -10,6 +10,7 @@ import net.htwater.xiaodiclass.service.VideoOrderService;
 import net.htwater.xiaodiclass.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.UUID;
@@ -32,6 +33,7 @@ public class VideoOrderServiceImpl implements VideoOrderService {
     @Autowired
     private PlayRecordMapper playRecordMapper;
 
+    @Transactional
     @Override
     public int save(int userId, int videoId) {
 
@@ -53,6 +55,8 @@ public class VideoOrderServiceImpl implements VideoOrderService {
         videoOrderTemp.setUserId((long) userId);
 
         int count = videoOrderMapper.saveOrder(videoOrderTemp);
+
+//        int i=1/0;
 
         if (count == 1) {
             Episode episode = episodeMapper.findFirstEpisodeByVideoId(videoId);
