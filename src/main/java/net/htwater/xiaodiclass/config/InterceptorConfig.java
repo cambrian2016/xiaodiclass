@@ -1,5 +1,6 @@
 package net.htwater.xiaodiclass.config;
 
+import net.htwater.xiaodiclass.interceptor.CorsInterceptor;
 import net.htwater.xiaodiclass.interceptor.LoginInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,6 +26,11 @@ public class InterceptorConfig implements WebMvcConfigurer {
         return new LoginInterceptor();
     }
 
+    @Bean
+    CorsInterceptor corsInterceptor() {
+        return new CorsInterceptor();
+    }
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //?   匹配任何单字符
@@ -32,6 +38,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
         //**  匹配0或者更多的目录
         registry.addInterceptor(loginInterceptor()).addPathPatterns("/api/v1/pri/**")
                 .excludePathPatterns("/api/v1/pri/user/login", "/api/v1/pri/user/register");
+
+        registry.addInterceptor(corsInterceptor()).addPathPatterns("/**");
 
         WebMvcConfigurer.super.addInterceptors(registry);
     }

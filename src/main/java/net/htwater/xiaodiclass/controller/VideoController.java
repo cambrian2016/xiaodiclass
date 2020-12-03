@@ -1,5 +1,7 @@
 package net.htwater.xiaodiclass.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import net.htwater.xiaodiclass.model.entity.Video;
 import net.htwater.xiaodiclass.model.entity.VideoBanner;
 import net.htwater.xiaodiclass.service.VideoService;
@@ -22,6 +24,11 @@ public class VideoController {
     @GetMapping("list")
     public JsonData videoList(){
         List<Video> videoList=videoService.videoList();
+        try {
+            System.out.println("videoList == "+new ObjectMapper().writeValueAsString(videoList));
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
         return JsonData.buildSuccess(videoList);
     }
 
