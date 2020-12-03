@@ -43,11 +43,11 @@ public class UserServiceImpl implements UserService {
             String token= JwtUtil.geneJsonWebToken(user);
             System.out.println("token = "+token);
 
-            try {
-                Thread.sleep(1000*5L);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                Thread.sleep(1000*5L);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
 
             Claims claims=JwtUtil.checkJwt(token);
             String name = (String) claims.get("name");
