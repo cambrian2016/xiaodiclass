@@ -1,6 +1,8 @@
 package net.htwater.xiaodiclass.model.entity;
 
 
+import io.swagger.annotations.ApiModel;
+
 import java.util.Date;
 
 public class Episode {

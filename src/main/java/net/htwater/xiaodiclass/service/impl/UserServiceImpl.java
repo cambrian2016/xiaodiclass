@@ -3,6 +3,7 @@ package net.htwater.xiaodiclass.service.impl;
 import io.jsonwebtoken.Claims;
 import net.htwater.xiaodiclass.model.entity.User;
 import net.htwater.xiaodiclass.mapper.UserMapper;
+import net.htwater.xiaodiclass.model.request.RegisterRequest;
 import net.htwater.xiaodiclass.service.UserService;
 import net.htwater.xiaodiclass.utils.EncryptUtil;
 import net.htwater.xiaodiclass.utils.JwtUtil;
@@ -24,8 +25,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int save(Map<String, String> userInfo) {
-        User user = parseToUser(userInfo);
+    public int save(RegisterRequest registerRequest) {
+        User user = parseToUser(registerRequest);
 
         if (user != null) {
             return userMapper.save(user);
@@ -65,14 +66,14 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-    private User parseToUser(Map<String, String> userInfo) {
-        if (userInfo.containsKey("phone") && userInfo.containsKey("pwd") && userInfo.containsKey("name")) {
+    private User parseToUser(RegisterRequest registerRequest) {
+        if (registerRequest.getName()!=null &&registerRequest.getPhone()!=null && registerRequest.getPwd()!=null) {
             User user = new User();
-            user.setName(userInfo.get("name"));
+            user.setName(registerRequest.getName());
             user.setHeadImg(getRandomImg());
             user.setCreateTime(new Date());
-            user.setPhone(userInfo.get("phone"));
-            user.setPwd(EncryptUtil.getMD5(userInfo.get("pwd")));
+            user.setPhone(registerRequest.getPhone());
+            user.setPwd(EncryptUtil.getMD5(registerRequest.getPwd()));
             return user;
         } else {
             return null;

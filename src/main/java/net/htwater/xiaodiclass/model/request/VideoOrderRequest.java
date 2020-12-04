@@ -1,10 +1,13 @@
 package net.htwater.xiaodiclass.model.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
+@ApiModel(description = "视频订单")
 public class VideoOrderRequest {
 
-//    @JsonProperty("video_id")
+    @ApiModelProperty("视频id")
     private int videoId;
 
     public int getVideoId() {
