@@ -1,18 +1,33 @@
 package net.htwater.xiaodiclass.model.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.Date;
 
+@ApiModel(description = "视频订单")
 public class VideoOrder {
 
+  @ApiModelProperty(value = "序号")
   private Long id;
+  @ApiModelProperty(value = "订单号")
   private String outTradeNo;
+  @ApiModelProperty(value = "状态")
   private Long state;
+  @ApiModelProperty(value = "创建时间")
+  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
   private Date createTime;
+  @ApiModelProperty(value = "总价")
   private Long totalFee;
+  @ApiModelProperty(value = "视频id")
   private Long videoId;
+  @ApiModelProperty(value = "视频标题")
   private String videoTitle;
+  @ApiModelProperty(value = "视频fengmian")
   private String videoImg;
+  @ApiModelProperty(value = "用户id")
   private Long userId;
 
   @Override

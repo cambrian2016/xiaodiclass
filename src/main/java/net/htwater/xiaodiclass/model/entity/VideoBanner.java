@@ -1,14 +1,25 @@
 package net.htwater.xiaodiclass.model.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.Date;
 
+@ApiModel(description = "视频横幅")
 public class VideoBanner {
 
+  @ApiModelProperty(value = "序号")
   private Long id;
+  @ApiModelProperty(value = "地址url")
   private String url;
+  @ApiModelProperty(value = "图片")
   private String img;
+  @ApiModelProperty(value = "创建时间")
+  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
   private Date createTime;
+  @ApiModelProperty(value = "权重")
   private Long weight;
 
   @Override

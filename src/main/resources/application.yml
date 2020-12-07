@@ -12,11 +12,11 @@ spring:
 
 mybatis:
   configuration:
-#    ¿ªÆô¿ØÖÆÌ¨´òÓ¡sql
+#    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¨ï¿½ï¿½Ó¡sql
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-#    ÏÂ»®Ïß×ªÍÕ·åÅäÖÃ
+#    ï¿½Â»ï¿½ï¿½ï¿½×ªï¿½Õ·ï¿½ï¿½ï¿½ï¿½ï¿½
     map-underscore-to-camel-case: true
-#  ÅäÖÃÉ¨Ãè
+#  ï¿½ï¿½ï¿½ï¿½É¨ï¿½ï¿½
 #  mapper-locations: classpath:mapper/*.xml
-#  ÅäÖÃxmlµÄ½á¹û±ğÃû
+#  ï¿½ï¿½ï¿½ï¿½xmlï¿½Ä½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 #  type-aliases-package: net.htwater.xiaodiclass.domain

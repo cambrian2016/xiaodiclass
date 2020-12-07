@@ -2,14 +2,13 @@ package net.htwater.xiaodiclass.model.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.util.Date;
 import java.util.List;
 
-@ApiModel("视频")
+@ApiModel(description = "视频")
 public class Video {
 
     @ApiModelProperty("序号")
@@ -19,18 +18,15 @@ public class Video {
     @ApiModelProperty("简介")
     private String summary;
     @ApiModelProperty("封面")
-    @JsonProperty("cover_img")
     private String coverImg;
     @ApiModelProperty("价格")
     private Long price;
     @ApiModelProperty("创建时间")
-    @JsonProperty("create_time")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;
     @ApiModelProperty("得分")
     private Double point;
-
-    @JsonProperty("chapter_list")
+    @ApiModelProperty("章节列表")
     private List<Chapter> chapterList;
 
     @Override

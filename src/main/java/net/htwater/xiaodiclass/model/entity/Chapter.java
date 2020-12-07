@@ -1,17 +1,28 @@
 package net.htwater.xiaodiclass.model.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.Date;
 import java.util.List;
 
+@ApiModel(description = "章节")
 public class Chapter {
 
+  @ApiModelProperty(value = "序号")
   private Long id;
+  @ApiModelProperty(value = "视频id")
   private Long videoId;
+  @ApiModelProperty(value = "章节名称")
   private String title;
+  @ApiModelProperty(value = "章节顺序")
   private Long ordered;
+  @ApiModelProperty(value = "创建时间")
+  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
   private Date createTime;
-
+  @ApiModelProperty(value = "集列表")
   private List<Episode> episodeList;
 
   @Override

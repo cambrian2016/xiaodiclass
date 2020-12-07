@@ -2,7 +2,7 @@ package net.htwater.xiaodiclass.interceptor;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Claims;
-import net.htwater.xiaodiclass.utils.JsonData;
+import net.htwater.xiaodiclass.utils.ResultBean;
 import net.htwater.xiaodiclass.utils.JwtUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -28,7 +28,7 @@ public class LoginInterceptor implements HandlerInterceptor {
                 Claims claims = JwtUtil.checkJwt(token);
                 if (claims == null) {
                     //告诉登录过期
-                    sendJsonMessage(response, JsonData.buildError("登录过期,重新登录"));
+                    sendJsonMessage(response, ResultBean.buildError("登录过期,重新登录"));
                     return false;
                 }
                 String id = claims.get("id")+"";
@@ -44,7 +44,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         }
 
         //告诉登录过期
-        sendJsonMessage(response, JsonData.buildError("登录过期,重新登录"));
+        sendJsonMessage(response, ResultBean.buildError("登录过期,重新登录"));
 
         return false;
     }

@@ -1,6 +1,6 @@
 package net.htwater.xiaodiclass.exception;
 
-import net.htwater.xiaodiclass.utils.JsonData;
+import net.htwater.xiaodiclass.utils.ResultBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -16,15 +16,15 @@ public class CustomExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     @ResponseBody
-    public JsonData handle(Exception e){
+    public ResultBean handle(Exception e){
 
         LOGGER.error("[ 系统异常 ]{}",e);
 
         if (e instanceof CustomException){
             CustomException customException= (CustomException) e;
-            return JsonData.buildError(customException.getCode(),customException.toString());
+            return ResultBean.buildError(customException.getCode(),customException.toString());
         }else{
-            return JsonData.buildError(e.toString()+" ____ "+e.getStackTrace()[0].toString());
+            return ResultBean.buildError(e.toString()+" ____ "+e.getStackTrace()[0].toString());
         }
     }
 }

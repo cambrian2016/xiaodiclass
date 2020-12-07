@@ -4,16 +4,16 @@ import io.swagger.annotations.*;
 import net.htwater.xiaodiclass.model.entity.User;
 import net.htwater.xiaodiclass.model.request.LoginRequest;
 import net.htwater.xiaodiclass.model.request.RegisterRequest;
+import net.htwater.xiaodiclass.model.result.LoginResultBean;
 import net.htwater.xiaodiclass.service.UserService;
-import net.htwater.xiaodiclass.utils.JsonData;
+import net.htwater.xiaodiclass.utils.ResultBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
 
 
-@Api(tags="userController",description = "用户api")
+@Api(tags = "userController", description = "用户api")
 @RestController
 @RequestMapping("api/v1/pri/user")
 public class UserController {
@@ -35,39 +35,39 @@ public class UserController {
 
     @ApiOperation("用户注册")
     @PostMapping("register")
-    public JsonData register(@RequestBody RegisterRequest registerRequest) {
+    public ResultBean register(@RequestBody RegisterRequest registerRequest) {
         int count = userService.save(registerRequest);
         if (count == 1) {
-            return JsonData.buildSuccess("注册成功");
+            return ResultBean.buildSuccess("注册成功");
         } else {
-            return JsonData.buildError("注册失败,请重试");
+            return ResultBean.buildError("注册失败,请重试");
         }
     }
 
     //登录接口
     @ApiOperation("用户登录")
     @PostMapping("login")
-    public JsonData login(@RequestBody @ApiParam("用户信息") LoginRequest loginRequest){
-        String token=userService.findByPhoneAndPwd(loginRequest.getPhone(),loginRequest.getPwd());
+    public ResultBean<LoginResultBean> login(@RequestBody @ApiParam("用户信息") LoginRequest loginRequest) {
+        String token = userService.findByPhoneAndPwd(loginRequest.getPhone(), loginRequest.getPwd());
 
-        if (token==null){
-             return JsonData.buildError("登录失败,账号密码错误");
-        }else {
-            return JsonData.buildSuccess(token);
+        if (token == null) {
+            return ResultBean.buildError("登录失败,账号密码错误");
+        } else {
+            return ResultBean.buildSuccess(new LoginResultBean(token));
         }
     }
 
     //根据UserId 查询User信息
     @ApiOperation("用户信息 通过token查找")
     @GetMapping("findUserInfoByToken")
-    public JsonData findUserInfoByToken(HttpServletRequest httpServletRequest){
-        String userId= (String) httpServletRequest.getAttribute("userId");
+    public ResultBean<User> findUserInfoByToken(HttpServletRequest httpServletRequest) {
+        String userId = (String) httpServletRequest.getAttribute("userId");
 
-        if (userId==null){
-            return JsonData.buildError("查询失败");
-        }else {
-            User user=userService.findByUserId(userId);
-            return JsonData.buildSuccess(user);
+        if (userId == null) {
+            return ResultBean.buildError("查询失败");
+        } else {
+            User user = userService.findByUserId(userId);
+            return ResultBean.buildSuccess(user);
         }
     }
 }
