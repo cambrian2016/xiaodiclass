@@ -12,57 +12,72 @@ public class ResultBean<T> {
     //业务数据
     private T data;
 
-    //信息
-    @ApiModelProperty("信息")
+     //返回信息
+    @ApiModelProperty("返回信息 用以反馈使用人员")
     private String message;
+
+    //错误信息
+    @ApiModelProperty("错误信息 用以反馈开发人员")
+    private String errorLog;
 
     public ResultBean() {
     }
 
-    public ResultBean(Integer code, T data, String message) {
+    public ResultBean(Integer code, T data, String message, String errorLog) {
         this.code = code;
         this.data = data;
         this.message = message;
-    }
-
-    //成功 不用返回数据
-    public static <T> ResultBean<T> buildSuccess(){
-        return new ResultBean<T>(0,null,null);
+        this.errorLog = errorLog;
     }
 
     //成功
-    public static <T> ResultBean<T> buildSuccess(T data){
-        return new ResultBean<T>(0,data,null);
+    public static <T> ResultBean<T> buildSuccess(T data) {
+        return new ResultBean<T>(0, data, null, null);
     }
 
     //成功
-    public static <T> ResultBean<T> buildSuccess(String message){
-        return new ResultBean<T>(0,null,message);
-    }
-
-    //失败
-    public static <T> ResultBean<T> buildError(T data, String message){
-        return new ResultBean<T>(-1,data,message);
-    }
-
-    //失败
-    public static <T> ResultBean<T> buildError(String message){
-        return new ResultBean<T>(-1,null,message);
+    public static <T> ResultBean<T> buildSuccess(String message) {
+        return new ResultBean<T>(0, null, message, null);
     }
 
 
     //失败
-    public static <T> ResultBean<T> buildError(Integer code, String message){
-        return new ResultBean<T>(code,null,message);
+    public static <T> ResultBean<T> buildError(String message) {
+        return new ResultBean<T>(-1, null, message, null);
+    }
+
+    //失败
+    public static <T> ResultBean<T> buildError(String message,String errorLog) {
+        return new ResultBean<T>(-1, null, message, errorLog);
+    }
+
+
+    //失败
+    public static <T> ResultBean<T> buildError(Integer code, String message) {
+        return new ResultBean<T>(code, null, message, null);
+    }
+
+    //失败
+    public static <T> ResultBean<T> buildError(Integer code, String message,String errorLog) {
+        return new ResultBean<T>(code, null, message, errorLog);
     }
 
     @Override
     public String toString() {
-        return "JsonData{" +
+        return "ResultBean{" +
                 "code=" + code +
                 ", data=" + data +
                 ", message='" + message + '\'' +
+                ", errorLog='" + errorLog + '\'' +
                 '}';
+    }
+
+    public String getErrorLog() {
+        return errorLog;
+    }
+
+    public void setErrorLog(String errorLog) {
+        this.errorLog = errorLog;
     }
 
     public Integer getCode() {

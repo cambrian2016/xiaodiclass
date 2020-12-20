@@ -32,7 +32,7 @@ public class VideoOrderController {
         if (count==0){
             return ResultBean.buildError("下单失败");
         }else {
-            return ResultBean.buildSuccess();
+            return ResultBean.buildSuccess("下单成功");
         }
 
     }
