@@ -2,7 +2,10 @@ package net.htwater.xiaodiclass.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.swagger.annotations.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import net.htwater.xiaodiclass.model.entity.Person;
 import net.htwater.xiaodiclass.model.entity.Video;
 import net.htwater.xiaodiclass.model.entity.VideoBanner;
@@ -13,7 +16,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.Positive;
 import java.util.List;
 
@@ -52,7 +54,7 @@ public class VideoController {
             @ApiImplicitParam(name = "videoId", value = "视频id", required = true, paramType = "query"),
     })
     @GetMapping("findDetailById")
-    public ResultBean<Video> findDetailById(int videoId) {
+    public ResultBean<Video> findDetailById(@Max(10) int videoId) {
         Video video = videoService.findDetailById(videoId);
 
         return ResultBean.buildSuccess(video);
