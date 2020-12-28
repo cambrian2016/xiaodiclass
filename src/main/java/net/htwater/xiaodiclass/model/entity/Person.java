@@ -6,7 +6,15 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
-
+/**
+* 类  名：
+* 描  述：
+* <p>
+* 功能一：
+*
+* @author ShenHaiyun no.HT151 软件部移动组
+* @date  
+*/
 @PasswordEqual(min = 2,max = 5)
 public class Person {
     /**
