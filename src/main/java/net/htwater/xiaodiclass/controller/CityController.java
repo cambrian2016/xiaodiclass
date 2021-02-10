@@ -1,6 +1,7 @@
 package net.htwater.xiaodiclass.controller;
 
 import net.htwater.xiaodiclass.model.entity.City;
+import net.htwater.xiaodiclass.model.entity.City2;
 import net.htwater.xiaodiclass.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,10 +22,17 @@ public class CityController {
     @Autowired
     private CityService cityService;
 
+    @Autowired
+    private City2 city2;
 
     @GetMapping("selectOne/{id}")
     public City selectOne(@PathVariable Integer id) {
         return this.cityService.queryById(id);
+    }
+
+    @GetMapping("city2")
+    private City2 getCity2(){
+        return city2;
     }
 
 }

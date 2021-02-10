@@ -2,9 +2,6 @@ package net.htwater.xiaodiclass.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-import springfox.documentation.RequestHandler;
 import springfox.documentation.builders.ParameterBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -17,7 +14,6 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Configuration
@@ -25,7 +21,7 @@ import java.util.List;
 public class SwaggerConfig {
 
     @Bean
-    public Docket docker(){
+    public Docket docker() {
 
         ParameterBuilder ticketPar = new ParameterBuilder();
         List<Parameter> pars = new ArrayList<Parameter>();
@@ -48,19 +44,20 @@ public class SwaggerConfig {
 
 
     //作者信息
-    private Contact contact=new Contact("沈晓耘","","969553988@qq.com");
+    private Contact contact = new Contact("沈晓耘", "", "969553988@qq.com");
 
     //Swagger 头部信息
-    private ApiInfo apiInfo(){
-        return new ApiInfo(
+    private ApiInfo apiInfo() {
+        ApiInfo apiInfo = new ApiInfo(
                 "小滴课堂Api文档",
                 "Spring Boot 学习项目 -by沈晓耘",
                 "1.01",
                 "",
-                null,
+                contact,
                 "",
                 "",
                 new ArrayList()
         );
+        return apiInfo;
     }
 }

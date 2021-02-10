@@ -17,6 +17,7 @@ import java.util.List;
 @ControllerAdvice
 public class CustomExceptionHandler {
 
+
     private final static Logger LOGGER = LoggerFactory.getLogger(CustomExceptionHandler.class);
 
     @ExceptionHandler(Exception.class)

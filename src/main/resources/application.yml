@@ -8,6 +8,8 @@ spring:
     url: jdbc:mysql://localhost:3306/xiaodidemo?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=false
     username: root
     password: root
+  mvc:
+    static-path-pattern: /res/**
 
 
 mybatis:
@@ -20,3 +22,13 @@ mybatis:
 #  mapper-locations: classpath:mapper/*.xml
 #  ����xml�Ľ������
 #  type-aliases-package: net.htwater.xiaodiclass.domain
+
+
+city2:
+  id: 23
+  fullName: cambrian
+  name: cam
+  shortName: ca
+
+
+
